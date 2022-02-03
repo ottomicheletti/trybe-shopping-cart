@@ -140,6 +140,18 @@ body {
   overflow-y: scroll;
 }
 
+.cart__item {
+  margin: 10px 5px;
+  padding: 5px;
+  border: 2px rgb(10, 118, 79) solid;
+  border-radius: 4px;
+}
+
+.cart__item:hover {
+  border-color: brown;
+  cursor: pointer;
+}
+
 .empty-cart {
   width: 170px;
   height: 35px;
