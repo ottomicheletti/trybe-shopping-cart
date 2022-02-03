@@ -1,10 +1,5 @@
-const saveCartItems = () => {
-  const cart = document.querySelector('ol');
-  const total = document.querySelector('.total-price');
-  const string = JSON.stringify(cart.innerHTML);
-  const string2 = JSON.stringify(total.textContent);
-  localStorage.setItem('cart', string);
-  localStorage.setItem('total', string2);
+const saveCartItems = (target) => {
+  localStorage.setItem('cartItems', target);
 };
 
 if (typeof module !== 'undefined') {

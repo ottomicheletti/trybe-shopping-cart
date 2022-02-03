@@ -24,16 +24,47 @@ const createCartItemElement = async (sku) => {
   cart.appendChild(li);
 };
 
+// ELEMENTOS
 const cartItems = document.querySelector('ol');
+const cartTotal = document.querySelector('.total-price');
+const clearCart = document.querySelector('.empty-cart');
+
+// ---- FUNÇÕES AUXILIARES
+const saveCartTotal = () => {
+  const string = JSON.stringify(cartTotal.textContent);
+  localStorage.setItem('total', string);
+};
+
+const getSavedTotal = () => {
+  const savedTotal = localStorage.getItem('total');
+  cartTotal.textContent = JSON.parse(savedTotal);
+};
 
 const sumCart = () => {
-  const cartTotal = document.querySelector('.total-price');
   let total = 0;
   for (let index = 0; index < cartItems.children.length; index += 1) {
     total += parseFloat(cartItems.children[index].getAttribute('value'));
   }
   cartTotal.textContent = total;
 };
+
+function cartItemClickListener(event) {
+  event.target.parentElement.removeChild(event.target);
+  sumCart();
+  saveCartItems(cartItems.innerHTML);
+  saveCartTotal();
+}
+
+cartItems.addEventListener('click', (event) => cartItemClickListener(event));
+
+clearCart.addEventListener('click', () => {
+  while (cartItems.children.length > 0) {
+    cartItems.removeChild(cartItems.children[0]);
+  }
+  sumCart();
+  saveCartItems(cartItems.innerHTML);
+  saveCartTotal();
+});
 
 function createProductItemElement({ id: sku, title: name, thumbnail: image }) {
   const section = document.createElement('section');
@@ -45,7 +76,8 @@ function createProductItemElement({ id: sku, title: name, thumbnail: image }) {
   button.addEventListener('click', async () => {
     await createCartItemElement(sku);
     sumCart();
-    saveCartItems();
+    saveCartItems(cartItems.innerHTML);
+    saveCartTotal();
   });
   section.appendChild(button);
   return section;
@@ -63,28 +95,8 @@ const callFetchProducts = async () => {
   });
 };
 
-//* function getSkuFromProductItem(item) {
-//   return item.querySelector('span.item__sku').innerText;
-// }
-
-function cartItemClickListener(event) {
-  event.target.parentElement.removeChild(event.target);
-  sumCart();
-  saveCartItems();
-}
-
-cartItems.addEventListener('click', (event) => cartItemClickListener(event));
-
-const clearCart = document.querySelector('.empty-cart');
-clearCart.addEventListener('click', () => {
-  while (cartItems.children.length > 0) {
-    cartItems.removeChild(cartItems.children[0]);
-  }
-  sumCart();
-  saveCartItems();
-});
-
 window.onload = async () => {
   await callFetchProducts();
   getSavedCartItems();
+  getSavedTotal();
 };
