@@ -53,7 +53,7 @@ function createProductItemElement({ id: sku, title: name, thumbnail: image }) {
 
 const callFetchProducts = async () => {
   const itemsDisplay = document.querySelector('.items');
-  itemsDisplay.innerHTML = `<p class="loading">carregando...</p>`;
+  itemsDisplay.innerHTML = '<p class="loading">carregando...</p>';
   const itemsArray = await fetchProducts('computador');
   itemsDisplay.innerHTML = null;
   itemsArray.forEach((item) => {
