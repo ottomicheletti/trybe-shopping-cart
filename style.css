@@ -152,10 +152,34 @@ body {
   cursor: pointer;
 }
 
+.total-price {
+  margin: 10px auto;
+  padding: 7px;
+  width: 170px;
+  height: 35px;
+  color: white;
+  text-align: center;
+  font-size: larger;
+  font-weight: 900;
+  background-color: rgb(10, 118, 79);
+  border: 2px rgb(10, 118, 79) solid;
+  border-radius: 4px;
+}
+
 .empty-cart {
   width: 170px;
   height: 35px;
   margin: 0 auto;
+  color: white;
+  text-align: center;
+  font-size: large;
+  font-weight: 900;
   border: 2px solid rgb(5, 52, 219);
-  background-color: rgb(249, 249, 246);
+  border-radius: 4px;
+  background-color: rgb(5, 52, 219);
+  cursor: pointer;
+}
+
+.empty-cart:hover {
+  box-shadow: 0 0 2px black;
 }
