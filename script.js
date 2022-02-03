@@ -52,8 +52,10 @@ function createProductItemElement({ id: sku, title: name, thumbnail: image }) {
 }
 
 const callFetchProducts = async () => {
-  const itemsArray = await fetchProducts('computador');
   const itemsDisplay = document.querySelector('.items');
+  itemsDisplay.innerHTML = `<p class="loading">carregando...</p>`;
+  const itemsArray = await fetchProducts('computador');
+  itemsDisplay.innerHTML = null;
   itemsArray.forEach((item) => {
     const { id, title, thumbnail } = item;
     const card = createProductItemElement({ id, title, thumbnail });

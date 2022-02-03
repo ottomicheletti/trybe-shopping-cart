@@ -1,10 +1,12 @@
 const getSavedCartItems = () => {
-  const savedCart = JSON.parse(localStorage.getItem('cart'));
-  const savedTotal = JSON.parse(localStorage.getItem('total'));
+  const savedCart = localStorage.getItem('cart');
+  const parsedSavedCart = JSON.parse(savedCart);
+  const savedTotal = localStorage.getItem('total');
+  const parsedSavedTotal = JSON.parse(savedTotal);
   const cart = document.querySelector('ol');
   const total = document.querySelector('.total-price');
-  cart.innerHTML = savedCart;
-  total.textContent = savedTotal;
+  cart.innerHTML = parsedSavedCart;
+  total.textContent = parsedSavedTotal;
 };
 
 if (typeof module !== 'undefined') {
